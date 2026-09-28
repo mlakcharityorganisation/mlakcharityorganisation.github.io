@@ -1,32 +1,525 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="MLAK Charity Organisation — bringing hope, changing lives and supporting communities.">
-<title>Donate | MLAK Charity Organisation</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate | Mlak Charity Organization</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d5c3d;
+      --primary-dark: #08402b;
+      --gold: #c9a227;
+      --gold-light: #e8d48b;
+      --light: #f7f9f4;
+      --dark: #1a1a1a;
+      --gray: #555;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      background: #fff;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Amiri', serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Header (same as homepage) */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 0.8rem 1.9rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
+    }
+
+    .btn-full {
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.1rem;
+    }
+
+    /* Hero */
+    .donate-hero {
+      background: linear-gradient(rgba(13, 92, 61, 0.9), rgba(8, 64, 43, 0.95)),
+                  url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600') center/cover;
+      color: white;
+      padding: 6rem 0 4rem;
+      text-align: center;
+    }
+
+    .donate-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .donate-hero p {
+      font-size: 1.25rem;
+      max-width: 650px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Main Content */
+    .donate-section {
+      padding: 5rem 0;
+      background: var(--light);
+    }
+
+    .donate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* Left side - Options */
+    .donation-options h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .option-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .option-card:hover,
+    .option-card.active {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    .option-card h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .option-card p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    .amount-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .amount-btn {
+      background: #e8f5e9;
+      color: var(--primary);
+      border: none;
+      padding: 0.7rem 1.3rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .amount-btn:hover,
+    .amount-btn.selected {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Right side - Form */
+    .donation-form {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 100px;
+    }
+
+    .donation-form h2 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .selected-amount {
+      background: var(--light);
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    /* Impact note */
+    .impact-note {
+      background: #e8f5e9;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .impact-note h3 {
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-dark);
+      color: white;
+      padding: 3rem 0 2rem;
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--gold);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .donate-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .donation-form {
+        position: static;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .donate-hero h1 {
+        font-size: 2.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="topbar"><div class="container"><div class="toplinks"><span>📍 Bringing hope. Changing lives.</span><span>☎ +256 700 123 456</span><span>✉ info@mlakcharity.org</span></div><span>Mon–Fri • 9:00–17:00</span></div></div>
-<header class="navbar"><div class="container">
-<a class="brand" href="index.html"><img src="assets/mlak-logo.png" alt="MLAK Charity Organisation logo"><div class="brand-text"><strong>MLAK</strong><span>CHARITY ORGANISATION</span></div></a>
-<button class="menu" aria-label="Open navigation">☰</button>
-<nav class="nav-links"><a class="" href="index.html">Home</a><a class="" href="about.html">About</a><a class="" href="programs.html">Programs</a><a class="" href="impact.html">Impact</a><a class="" href="volunteer.html">Volunteer</a><a class="active" href="donate.html">Donate</a><a class="" href="contact.html">Contact</a><a class="btn btn-primary mobile-only" href="donate.html">Donate Now</a></nav>
-<a class="btn btn-primary" href="donate.html">♡ Donate</a>
-</div></header>
 
-<section class="page-hero"><div class="container"><span class="kicker">Give with purpose</span><h1>Make a Donation</h1><p>Your support can help MLAK deliver community programmes. Choose an amount and preferred payment route.</p></div></section>
-<section class="section"><div class="container form-wrap"><form id="donationForm" class="form-card"><h2>Your donation</h2><div class="notice">This is a front-end donation experience. Connect it to your approved payment processor and secure server before accepting real payments.</div><label style="font-size:.85rem;font-weight:800">Choose amount</label><div class="amounts"><button type="button" class="amount" data-amount="10000">UGX 10K</button><button type="button" class="amount" data-amount="25000">UGX 25K</button><button type="button" class="amount" data-amount="50000">UGX 50K</button><button type="button" class="amount" data-amount="100000">UGX 100K</button></div><div class="form-grid"><div class="field"><label>Custom amount (UGX)</label><input id="customAmount" type="number" min="1000" placeholder="e.g. 75000"></div><div class="field"><label>Payment method</label><select id="paymentMethod"><option>Mobile Money</option><option>Bank Transfer</option><option>Card</option></select></div><div class="field"><label>Your name</label><input type="text"></div><div class="field"><label>Email receipt</label><input type="email"></div><div class="field full"><label>Donation purpose</label><select><option>Where needed most</option><option>Education</option><option>Healthcare</option><option>Hunger & Nutrition</option><option>Community Development</option></select></div><input id="donationAmount" type="hidden"><div class="field full"><button class="btn btn-primary" type="submit">Continue to Secure Payment →</button></div></div></form><aside><div class="card"><h3>Where your support can help</h3><div class="checks"><div><b>✓</b><span>Education materials and learning support</span></div><div><b>✓</b><span>Food and nutrition assistance</span></div><div><b>✓</b><span>Community health initiatives</span></div><div><b>✓</b><span>Livelihood and development programmes</span></div></div></div><div class="card" style="margin-top:20px"><h3>Donor care</h3><p>For production, publish a clear donation policy, receipt process, privacy notice and refund/contact procedure. Never store card details on your own server.</p></div></aside></div></section>
+  <!-- HEADER -->
+  <header>
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <span>☪</span> Mlak <span>Charity Organization</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#countries">Countries</a></li>
+          <li><a href="index.html#stories">Stories</a></li>
+          <li><a href="index.html#programs">Programs</a></li>
+          <li><a href="donate.html">Donate</a></li>
+        </ul>
+      </nav>
+      <a href="donate.html" class="btn">Donate Now</a>
+    </div>
+  </header>
 
-<footer class="footer"><div class="container">
-<div class="footer-grid">
-<div><div class="brand"><img src="assets/mlak-logo.png" alt=""><div class="brand-text"><strong>MLAK</strong><span>CHARITY ORGANISATION</span></div></div><p style="margin-top:15px">A community-focused charity working to support vulnerable people, strengthen communities and create sustainable opportunities.</p></div>
-<div><h3>Organisation</h3><div class="footer-links"><a href="about.html">About Us</a><a href="programs.html">Our Programs</a><a href="impact.html">Our Impact</a><a href="volunteer.html">Volunteer</a></div></div>
-<div><h3>Get Involved</h3><div class="footer-links"><a href="donate.html">Donate</a><a href="contact.html">Partner With Us</a><a href="contact.html">Contact Us</a><a href="contact.html">Report / Feedback</a></div></div>
-<div><h3>Stay Connected</h3><p>Receive programme updates, impact stories and opportunities to support our work.</p><form id="newsletter" style="display:flex;gap:7px;margin-top:13px"><input aria-label="Email" type="email" required placeholder="Your email" style="min-width:0;flex:1;border-radius:10px;border:0;padding:11px"><button class="btn btn-primary" type="submit">Join</button></form></div>
-</div>
-<div class="copyright"><span>© <span data-year></span> MLAK Charity Organisation. All rights reserved.</span><span>Privacy • Safeguarding • Transparency</span></div>
-</div></footer>
-<script src="script.js"></script>
-</body></html>
+  <!-- HERO -->
+  <section class="donate-hero">
+    <div class="container">
+      <h1>Make a Difference Today</h1>
+      <p>Your donation provides clean water, food, education, and hope to families in Sudan, Uganda, and Kenya.</p>
+    </div>
+  </section>
+
+  <!-- DONATE SECTION -->
+  <section class="donate-section">
+    <div class="container">
+      <div class="donate-grid">
+
+        <!-- LEFT: Donation Options -->
+        <div class="donation-options">
+          <h2>Choose How to Give</h2>
+
+          <div class="option-card active" onclick="selectOption(this, 'General Donation')">
+            <h3>General Donation</h3>
+            <p>Support our overall mission where the need is greatest across Sudan, Uganda & Kenya.</p>
+            <div class="amount-buttons">
+              <button class="amount-btn" onclick="selectAmount(25)">$25</button>
+              <button class="amount-btn" onclick="selectAmount(50)">$50</button>
+              <button class="amount-btn" onclick="selectAmount(100)">$100</button>
+              <button class="amount-btn" onclick="selectAmount(250)">$250</button>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'Sponsor a Borehole')">
+            <h3>💧 Sponsor a Borehole</h3>
+            <p>Provide clean and safe drinking water to an entire village. A lasting Sadaqah Jariyah.</p>
+            <div class="amount-buttons">
+              <button class="amount-btn" onclick="selectAmount(500)">$500</button>
+              <button class="amount-btn" onclick="selectAmount(1000)">$1,000</button>
+              <button class="amount-btn" onclick="selectAmount(2500)">$2,500</button>
+              <button class="amount-btn" onclick="selectAmount(5000)">Full Borehole</button>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'Orphan Sponsorship')">
+            <h3>🧒 Orphan Sponsorship</h3>
+            <p>Support an orphan with education, food, healthcare and care for one year.</p>
+            <div class="amount-buttons">
+              <button class="amount-btn" onclick="selectAmount(30)">$30 / month</button>
+              <button class="amount-btn" onclick="selectAmount(360)">$360 / year</button>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'Zakat / Sadaqah')">
+            <h3>🌙 Zakat & Sadaqah</h3>
+            <p>Fulfill your Zakat or give Sadaqah. 100% of funds reach those in need.</p>
+            <div class="amount-buttons">
+              <button class="amount-btn" onclick="selectAmount(50)">$50</button>
+              <button class="amount-btn" onclick="selectAmount(100)">$100</button>
+              <button class="amount-btn" onclick="selectAmount(200)">$200</button>
+              <button class="amount-btn" onclick="selectAmount(500)">$500</button>
+            </div>
+          </div>
+
+          <div class="impact-note">
+            <h3>Your Impact</h3>
+            <p>$25 can feed a family for a week • $50 provides clean water access • $360 sponsors an orphan for a full year</p>
+          </div>
+        </div>
+
+        <!-- RIGHT: Donation Form -->
+        <div class="donation-form">
+          <h2>Complete Your Donation</h2>
+
+          <div class="selected-amount" id="displayAmount">
+            Selected: $50
+          </div>
+
+          <form onsubmit="return handleDonate(event)">
+            <div class="form-group">
+              <label>Donation Type</label>
+              <input type="text" id="donationType" value="General Donation" readonly>
+            </div>
+
+            <div class="form-group">
+              <label>Amount (USD)</label>
+              <input type="number" id="amountInput" value="50" min="1" required oninput="updateAmountDisplay()">
+            </div>
+
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" placeholder="Your full name" required>
+            </div>
+
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="your@email.com" required>
+            </div>
+
+            <div class="form-group">
+              <label>Phone (Optional)</label>
+              <input type="tel" placeholder="+256 or international">
+            </div>
+
+            <div class="form-group">
+              <label>Country</label>
+              <select>
+                <option>Uganda</option>
+                <option>Kenya</option>
+                <option>Sudan</option>
+                <option>United States</option>
+                <option>United Kingdom</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Message / Dedication (Optional)</label>
+              <textarea rows="3" placeholder="Any special request or dedication..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-full">Donate Securely Now</button>
+          </form>
+
+          <p class="note">
+            🔒 Secure payment • 100% of your donation goes to the cause<br>
+            For bank transfer or mobile money, contact us at <strong>mlakcharityorganisation@gmail.com</strong>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Mlak Charity Organization• Eastern Uganda, Africa</p>
+      <p style="margin-top: 0.8rem;">
+        <a href="index.html">← Back to Home</a> &nbsp;|&nbsp;
+        Phone: +211924895248 &nbsp;|&nbsp;
+        Email: mlakcharityorganisation@gmail.com
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Select donation option
+    function selectOption(element, type) {
+      document.querySelectorAll('.option-card').forEach(card => {
+        card.classList.remove('active');
+      });
+      element.classList.add('active');
+      document.getElementById('donationType').value = type;
+    }
+
+    // Select amount
+    function selectAmount(amount) {
+      document.getElementById('amountInput').value = amount;
+      updateAmountDisplay();
+
+      // Highlight selected amount button
+      document.querySelectorAll('.amount-btn').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+      event.target.classList.add('selected');
+    }
+
+    function updateAmountDisplay() {
+      const amount = document.getElementById('amountInput').value;
+      document.getElementById('displayAmount').innerText = `Selected: $${Number(amount).toLocaleString()}`;
+    }
+
+    // Handle form (demo)
+    function handleDonate(e) {
+      e.preventDefault();
+      const type = document.getElementById('donationType').value;
+      const amount = document.getElementById('amountInput').value;
+      alert(`Thank you for your generous donation of $${amount} towards "${type}"!\n\nIn a real website, this would redirect to a secure payment gateway (Stripe, PayPal, or Mobile Money).`);
+      return false;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,52 +1,1001 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="MLAK Charity Organisation — bringing hope, changing lives and supporting communities.">
-<title>Home | MLAK Charity Organisation</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mlak Charity Organization</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d5c3d;
+      --primary-dark: #08402b;
+      --gold: #c9a227;
+      --gold-light: #e8d48b;
+      --light: #f7f9f4;
+      --dark: #1a1a1a;
+      --gray: #555;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Amiri', serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2.2rem;
+    }
+
+    nav a {
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 0.8rem 1.9rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    /* Mobile Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      background: linear-gradient(rgba(13, 92, 61, 0.88), rgba(8, 64, 43, 0.92)),
+                  url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600') center/cover no-repeat;
+      color: white;
+      padding: 9rem 0 7rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.4rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 720px;
+      margin: 0 auto 2.8rem;
+      opacity: 0.95;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ========== IMPACT ========== */
+    .impact {
+      background: var(--light);
+      padding: 5rem 0;
+      text-align: center;
+    }
+
+    .impact h2 {
+      font-size: 2.4rem;
+      color: var(--primary);
+      margin-bottom: 3.5rem;
+    }
+
+    .counters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .counter-box {
+      background: white;
+      padding: 2.2rem 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      transition: transform 0.3s;
+    }
+
+    .counter-box:hover {
+      transform: translateY(-8px);
+    }
+
+    .counter-box .number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .counter-box .label {
+      color: var(--gray);
+      margin-top: 0.6rem;
+      font-size: 1.05rem;
+    }
+
+    /* ========== COUNTRIES ========== */
+    .countries {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.6rem;
+      color: var(--primary);
+    }
+
+    .section-title p {
+      color: var(--gray);
+      max-width: 620px;
+      margin: 1rem auto 0;
+      font-size: 1.1rem;
+    }
+
+    .countries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.2rem;
+    }
+
+    .country-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+    }
+
+    .country-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+    }
+
+    .country-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .country-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .country-content {
+      padding: 1.8rem;
+    }
+
+    .country-content h3 {
+      color: var(--primary);
+      margin-bottom: 0.7rem;
+      font-size: 1.5rem;
+    }
+
+    .country-content p {
+      color: var(--gray);
+      font-size: 0.98rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e8f5e9;
+      color: var(--primary);
+      padding: 0.35rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      margin: 0 0.3rem 0.4rem 0;
+      font-weight: 500;
+    }
+
+    /* ========== STORIES ========== */
+    .stories {
+      background: var(--light);
+      padding: 6rem 0;
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.2rem;
+    }
+
+    .story-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .story-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .story-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .story-content {
+      padding: 1.8rem;
+    }
+
+    .story-content h3 {
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+      font-size: 1.4rem;
+    }
+
+    .story-content p {
+      color: var(--gray);
+      font-size: 0.98rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .read-more {
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.3s;
+    }
+
+    .read-more:hover {
+      gap: 10px;
+    }
+
+    /* ========== PROGRAMS ========== */
+    .programs {
+      padding: 6rem 0;
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .program-card {
+      text-align: center;
+      padding: 2.5rem 1.8rem;
+      border-radius: 16px;
+      background: white;
+      border: 1px solid #eee;
+      transition: all 0.3s;
+    }
+
+    .program-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 15px 40px rgba(13, 92, 61, 0.12);
+      transform: translateY(-8px);
+    }
+
+    .program-icon {
+      font-size: 2.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .program-card h3 {
+      color: var(--primary);
+      margin-bottom: 0.7rem;
+      font-size: 1.35rem;
+    }
+
+    /* ========== WAYS TO GIVE ========== */
+    .give {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 6rem 0;
+      text-align: center;
+    }
+
+    .give h2 {
+      font-size: 2.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .give p {
+      max-width: 620px;
+      margin: 0 auto 3rem;
+      opacity: 0.92;
+      font-size: 1.15rem;
+    }
+
+    .give-options {
+      display: flex;
+      gap: 1.3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--primary-dark);
+      color: white;
+      padding: 5rem 0 2.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-col h4 {
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      font-size: 1.3rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    /* ========== MODAL ========== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 700px;
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: modalIn 0.4s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .modal-body h3 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-body p {
+      color: var(--gray);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      z-index: 10;
+    }
+
+    /* ========== COOKIE BANNER ========== */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-dark);
+      color: white;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      z-index: 3000;
+      box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .cookie-banner.show {
+      transform: translateY(0);
+    }
+
+    .cookie-banner p {
+      font-size: 0.95rem;
+      opacity: 0.95;
+    }
+
+    .cookie-banner .btn {
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--primary);
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1.2rem;
+        text-align: center;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .cookie-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="topbar"><div class="container"><div class="toplinks"><span>📍 Bringing hope. Changing lives.</span><span>☎ +256 700 123 456</span><span>✉ info@mlakcharity.org</span></div><span>Mon–Fri • 9:00–17:00</span></div></div>
-<header class="navbar"><div class="container">
-<a class="brand" href="index.html"><img src="assets/mlak-logo.png" alt="MLAK Charity Organisation logo"><div class="brand-text"><strong>MLAK</strong><span>CHARITY ORGANISATION</span></div></a>
-<button class="menu" aria-label="Open navigation">☰</button>
-<nav class="nav-links"><a class="active" href="index.html">Home</a><a class="" href="about.html">About</a><a class="" href="programs.html">Programs</a><a class="" href="impact.html">Impact</a><a class="" href="volunteer.html">Volunteer</a><a class="" href="donate.html">Donate</a><a class="" href="contact.html">Contact</a><a class="btn btn-primary mobile-only" href="donate.html">Donate Now</a></nav>
-<a class="btn btn-primary" href="donate.html">♡ Donate</a>
-</div></header>
 
-<section class="hero"><div class="container hero-grid">
-<div><span class="kicker">Together, we can</span><h1>Bringing <span class="gradient-text">Hope.</span><br>Changing <span class="gradient-text">Lives.</span></h1>
-<p>MLAK Charity Organisation is dedicated to improving lives, supporting vulnerable communities and creating pathways to a brighter, more sustainable future.</p>
-<div class="hero-actions"><a class="btn btn-primary" href="donate.html">Donate Now ♥</a><a class="btn" style="border:1px solid rgba(255,255,255,.45);color:#fff" href="programs.html">Explore Our Work →</a></div></div>
-<div class="hero-card"><img class="hero-logo" src="assets/mlak-logo.png" alt="MLAK logo"><h3>Our commitment</h3><p style="color:#b9c9dd;margin-top:7px">People first. Communities stronger. Change that lasts.</p><div class="stats"><div class="stat"><b>2,450+</b><span>People reached</span></div><div class="stat"><b>85+</b><span>Communities served</span></div><div class="stat"><b>32</b><span>Projects delivered</span></div><div class="stat"><b>120+</b><span>Volunteers</span></div></div></div>
-</div></section>
-<section class="quick"><div class="container quick-grid">
-<div class="quick-item"><div class="quick-icon">♡</div><h3>Make a Donation</h3><p>Your support helps provide practical assistance where it is needed most.</p></div>
-<div class="quick-item"><div class="quick-icon">✋</div><h3>Become a Volunteer</h3><p>Give your time, skills and energy to meaningful community work.</p></div>
-<div class="quick-item"><div class="quick-icon">↗</div><h3>Share Our Mission</h3><p>Help more people discover the work and join the movement.</p></div>
-<div class="quick-item"><div class="quick-icon">✦</div><h3>Partner With Us</h3><p>Collaborate on programmes that create measurable social impact.</p></div>
-</div></section>
-<section class="section"><div class="container"><div class="section-head"><span class="eyebrow">Our causes</span><h2>We focus on what <span class="gradient-text">matters most.</span></h2><p>Our programmes are designed around real community needs, with dignity, accountability and long-term impact at the centre.</p></div>
-<div class="cards">
-<div class="card cause"><div class="cause-img">🥗</div><div class="body"><h3>Hunger & Nutrition</h3><p>Supporting food security, nutrition and access to essential resources.</p><a href="programs.html">Learn more →</a></div></div>
-<div class="card cause"><div class="cause-img">📚</div><div class="body"><h3>Education</h3><p>Helping children and young people access learning and opportunity.</p><a href="programs.html">Learn more →</a></div></div>
-<div class="card cause"><div class="cause-img">♥</div><div class="body"><h3>Healthcare</h3><p>Promoting healthier communities and access to essential support.</p><a href="programs.html">Learn more →</a></div></div>
-<div class="card cause"><div class="cause-img">♧</div><div class="body"><h3>Community Development</h3><p>Building resilient communities through skills, livelihoods and inclusion.</p><a href="programs.html">Learn more →</a></div></div>
-</div></div></section>
-<section class="section section-alt"><div class="container split"><div class="image-panel"></div><div><span class="eyebrow">Why MLAK</span><h2>Compassion backed by action.</h2><p>We believe charity should do more than provide temporary relief. Our goal is to listen, respond responsibly and help communities build stronger futures.</p><div class="checks"><div><b>✓</b><span><strong>Community-led</strong><br>Programmes shaped around local priorities.</span></div><div><b>✓</b><span><strong>Transparent</strong><br>Clear communication about our work and resources.</span></div><div><b>✓</b><span><strong>Sustainable</strong><br>Solutions designed for lasting change.</span></div></div><a class="btn btn-dark" href="about.html">Learn About Us →</a></div></div></section>
-<section class="section impact"><div class="container"><div class="section-head"><span class="eyebrow">Our impact</span><h2>Every contribution can become a story of change.</h2><p>Use this section for verified annual figures once your organisation has published its monitoring and evaluation data.</p></div><div class="impact-grid"><div><div class="impact-number">2.4K+</div><div class="impact-label">People reached*</div></div><div><div class="impact-number">85+</div><div class="impact-label">Communities*</div></div><div><div class="impact-number">32</div><div class="impact-label">Projects*</div></div><div><div class="impact-number">120+</div><div class="impact-label">Volunteers*</div></div></div><p style="font-size:.75rem;color:#70839b;margin-top:25px">*Illustrative figures for this website template. Replace with audited/verified organisation data before publication.</p></div></section>
-<section class="section"><div class="container"><div class="cta"><div><span class="eyebrow">Get involved</span><h2>Be part of the change.</h2><p>Donate, volunteer, partner with us or simply share the mission with someone who can help.</p></div><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-primary" href="donate.html">Donate Now</a><a class="btn" style="border:1px solid rgba(255,255,255,.3);color:#fff" href="volunteer.html">Volunteer</a></div></div></div></section>
+  <!-- HEADER -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <span>☪</span> Mlak <span> Charity Organization</span>
+      </div>
+      <nav>
+        <ul id="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#countries">Countries</a></li>
+          <li><a href="#stories">Stories</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#give">Donate</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <a href="donate.html" class="btn">Donate Now</a>
+    </div>
+  </header>
 
-<footer class="footer"><div class="container">
-<div class="footer-grid">
-<div><div class="brand"><img src="assets/mlak-logo.png" alt=""><div class="brand-text"><strong>MLAK</strong><span>CHARITY ORGANISATION</span></div></div><p style="margin-top:15px">A community-focused charity working to support vulnerable people, strengthen communities and create sustainable opportunities.</p></div>
-<div><h3>Organisation</h3><div class="footer-links"><a href="about.html">About Us</a><a href="programs.html">Our Programs</a><a href="impact.html">Our Impact</a><a href="volunteer.html">Volunteer</a></div></div>
-<div><h3>Get Involved</h3><div class="footer-links"><a href="donate.html">Donate</a><a href="contact.html">Partner With Us</a><a href="contact.html">Contact Us</a><a href="contact.html">Report / Feedback</a></div></div>
-<div><h3>Stay Connected</h3><p>Receive programme updates, impact stories and opportunities to support our work.</p><form id="newsletter" style="display:flex;gap:7px;margin-top:13px"><input aria-label="Email" type="email" required placeholder="Your email" style="min-width:0;flex:1;border-radius:10px;border:0;padding:11px"><button class="btn btn-primary" type="submit">Join</button></form></div>
-</div>
-<div class="copyright"><span>© <span data-year></span> MLAK Charity Organisation. All rights reserved.</span><span>Privacy • Safeguarding • Transparency</span></div>
-</div></footer>
-<script src="script.js"></script>
-</body></html>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container">
+      <h1>Restoring Hope Through Compassion</h1>
+      <p>We provide clean water, food, education, and emergency relief to vulnerable communities in Sudan, Uganda, and Kenya — guided by faith and integrity.</p>
+      <div class="hero-buttons">
+        <a href="donate.html" class="btn">Donate Now</a>
+        <a href="#stories" class="btn btn-outline">See Our Impact</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT COUNTERS -->
+  <section class="impact">
+    <div class="container">
+      <h2>Our Impact So Far</h2>
+      <div class="counters">
+        <div class="counter-box">
+          <div class="number" data-target="40">0</div>
+          <div class="label">Boreholes Drilled</div>
+        </div>
+        <div class="counter-box">
+          <div class="number" data-target="12000">0</div>
+          <div class="label">Food Packs Distributed</div>
+        </div>
+        <div class="counter-box">
+          <div class="number" data-target="250">0</div>
+          <div class="label">Orphans Supported</div>
+        </div>
+        <div class="counter-box">
+          <div class="number" data-target="3">0</div>
+          <div class="label">Mosques Built</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTRIES -->
+  <section class="countries" id="countries">
+    <div class="container">
+      <div class="section-title">
+        <h2>Where We Work</h2>
+        <p>Bringing clean water, food, education and hope to vulnerable communities across East Africa.</p>
+      </div>
+
+      <div class="countries-grid">
+        <!-- Sudan -->
+        <div class="country-card">
+          <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600" alt="Sudan">
+          <div class="country-content">
+            <h3>🇸🇩 Sudan</h3>
+            <p>Emergency relief, clean water projects, food distribution and support for displaced families affected by conflict and hardship.</p>
+            <span class="tag">Emergency Relief</span>
+            <span class="tag">Water Wells</span>
+            <span class="tag">Food Aid</span>
+            <span class="tag">Orphans</span>
+          </div>
+        </div>
+
+        <!-- Uganda -->
+        <div class="country-card">
+          <img src="https://images.unsplash.com/photo-1523805003905-77838bb2e0f8?w=600" alt="Uganda">
+          <div class="country-content">
+            <h3>🇺🇬 Uganda</h3>
+            <p>Our main operational base in Eastern Uganda. Boreholes, orphan care, mosque construction, food packs and Quran distribution.</p>
+            <span class="tag">Water Wells</span>
+            <span class="tag">Orphans</span>
+            <span class="tag">Mosques</span>
+            <span class="tag">Food Aid</span>
+          </div>
+        </div>
+
+        <!-- Kenya -->
+        <div class="country-card">
+          <img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=600" alt="Kenya">
+          <div class="country-content">
+            <h3>🇰🇪 Kenya</h3>
+            <p>Supporting vulnerable communities with clean water access, food security, orphan sponsorship and Islamic education programs.</p>
+            <span class="tag">Clean Water</span>
+            <span class="tag">Orphan Care</span>
+            <span class="tag">Food Security</span>
+            <span class="tag">Education</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  <section class="stories" id="stories">
+    <div class="container">
+      <div class="section-title">
+        <h2>Impact Stories</h2>
+        <p>Real lives changed by your generosity and our collective efforts.</p>
+      </div>
+      <div class="stories-grid">
+
+        <div class="story-card" onclick="openModal('story1')">
+          <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600" alt="Water well">
+          <div class="story-content">
+            <h3>From Miles of Walking to Clean Water at Home</h3>
+            <p>In a remote village, women and children used to walk several kilometers daily for unsafe water. After our borehole was completed, everything changed...</p>
+            <span class="read-more">Read Full Story →</span>
+          </div>
+        </div>
+
+        <div class="story-card" onclick="openModal('story2')">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600" alt="Orphan">
+          <div class="story-content">
+            <h3>Amina’s New Beginning</h3>
+            <p>Orphaned at a young age, Amina now receives education, food, and care through our orphan sponsorship program. Her smile tells the whole story.</p>
+            <span class="read-more">Read Full Story →</span>
+          </div>
+        </div>
+
+        <div class="story-card" onclick="openModal('story3')">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600" alt="Mosque">
+          <div class="story-content">
+            <h3>Building a House of Allah</h3>
+            <p>The community finally has a proper mosque. Friday prayers, Quran classes, and gatherings now take place under one roof — a true Sadaqah Jariyah.</p>
+            <span class="read-more">Read Full Story →</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="programs" id="programs">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Programs</h2>
+        <p>Sustainable solutions rooted in compassion and Islamic values.</p>
+      </div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-icon">💧</div>
+          <h3>Clean Water</h3>
+          <p>Boreholes and wells bringing safe drinking water to remote villages.</p>
+        </div>
+        <div class="program-card">
+          <div class="program-icon">🍚</div>
+          <h3>Food Distribution</h3>
+          <p>Nutritious food packs for orphans, widows, and struggling families.</p>
+        </div>
+        <div class="program-card">
+          <div class="program-icon">🧒</div>
+          <h3>Orphan Care</h3>
+          <p>Education, food, healthcare and emotional support for vulnerable children.</p>
+        </div>
+        <div class="program-card">
+          <div class="program-icon">🕌</div>
+          <h3>Mosque Construction</h3>
+          <p>Building places of worship and community centers (Sadaqah Jariyah).</p>
+        </div>
+        <div class="program-card">
+          <div class="program-icon">🌙</div>
+          <h3>Ramadan & Zakat</h3>
+          <p>Iftar meals, Zakat distribution, and Qurbani support every year.</p>
+        </div>
+        <div class="program-card">
+          <div class="program-icon">📖</div>
+          <h3>Quran & Education</h3>
+          <p>Distributing Qurans and supporting Islamic learning for the next generation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAYS TO GIVE -->
+  <section class="give" id="give">
+    <div class="container">
+      <h2>Ways to Give</h2>
+      <p>Every donation, big or small, creates lasting change. Choose how you want to help today.</p>
+      <div class="give-options">
+        <a href="#" class="btn">General Donation</a>
+        <a href="#" class="btn">Sponsor a Borehole</a>
+        <a href="#" class="btn">Orphan Sponsorship</a>
+        <a href="#" class="btn">Zakat / Sadaqah</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Mlak Charity Organization</h4>
+          <p>A faith-driven organization dedicated to restoring hope and dignity through clean water, food, education, and emergency relief in Sudan, Uganda, and Kenya.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#countries">Countries</a></li>
+            <li><a href="#stories">Stories</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#give">Donate</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul>
+            <li>📍 Juba Sudan, Africa</li>
+            <li>📞 +211924895248</li>
+            <li>✉️ mlakcharityorganisation@gmail.com</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get Involved</h4>
+          <ul>
+            <li><a href="#">Volunteer</a></li>
+            <li><a href="#">Partner With Us</a></li>
+            <li><a href="#">Sponsor a Project</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        © 2026 Mlak Charity Organization. All rights reserved. | Guided by compassion, faith & integrity.
+      </div>
+    </div>
+  </footer>
+
+  <!-- STORY MODALS -->
+  <div class="modal" id="story1">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('story1')">×</button>
+      <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800" alt="Clean water">
+      <div class="modal-body">
+        <h3>From Miles of Walking to Clean Water at Home</h3>
+        <p>In a remote village in Eastern Uganda, women and young girls spent many hours every day walking long distances under the hot sun just to collect water that was often contaminated.</p>
+        <p>Children frequently fell sick with waterborne diseases. Mothers had less time for farming or caring for their families.</p>
+        <p>Thanks to generous donors, Mlak Charity Organization drilled a deep borehole right in the heart of the community. Today, clean and safe water flows freely. The women now have more time for their families, children are healthier, and the entire village has new hope.</p>
+        <p><strong>This is the power of Sadaqah Jariyah.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="story2">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('story2')">×</button>
+      <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800" alt="Amina">
+      <div class="modal-body">
+        <h3>Amina’s New Beginning</h3>
+        <p>Amina lost both her parents at a very young age. She was living with relatives who could barely afford food, let alone school fees.</p>
+        <p>Through our Orphan Sponsorship program, Amina now receives monthly support that covers her education, school uniform, books, nutritious meals, and basic healthcare.</p>
+        <p>Today she is one of the top students in her class and dreams of becoming a teacher so she can help other children like herself.</p>
+        <p>Your sponsorship doesn’t just change one life — it changes an entire future.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="story3">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('story3')">×</button>
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800" alt="Mosque">
+      <div class="modal-body">
+        <h3>Building a House of Allah</h3>
+        <p>For many years, the community prayed under a temporary shelter made of iron sheets. During the rainy season, prayers were often interrupted by leaking roofs.</p>
+        <p>With the support of donors, Mlak Charity Organization constructed a beautiful and solid mosque complete with a prayer hall, ablution area, and a small space for Quran classes.</p>
+        <p>Now the community gathers in dignity. Children learn the Quran, Friday prayers are full, and the mosque has become the heart of the village.</p>
+        <p>This is a continuous charity (Sadaqah Jariyah) that will benefit the donors long after they have left this world.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COOKIE BANNER -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>We use cookies to improve your experience on our website. By continuing to browse, you agree to our use of cookies.</p>
+    <button class="btn" onclick="acceptCookies()">Accept</button>
+  </div>
+
+  <script>
+    // Mobile Menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Counter Animation
+    const counters = document.querySelectorAll('.number');
+    const speed = 200;
+
+    const animateCounters = () => {
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText.replace(/,/g, '').replace('+', '');
+          const increment = target / speed;
+
+          if (count < target) {
+            counter.innerText = Math.ceil(count + increment).toLocaleString();
+            setTimeout(updateCount, 15);
+          } else {
+            counter.innerText = target.toLocaleString() + '+';
+          }
+        };
+        updateCount();
+      });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        animateCounters();
+        observer.disconnect();
+      }
+    }, { threshold: 0.5 });
+
+    observer.observe(document.querySelector('.impact'));
+
+    // Modal Functions
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+
+    // Cookie Banner
+    function acceptCookies() {
+      localStorage.setItem('cookiesAccepted', 'true');
+      document.getElementById('cookieBanner').classList.remove('show');
+    }
+
+    window.addEventListener('load', () => {
+      if (!localStorage.getItem('cookiesAccepted')) {
+        setTimeout(() => {
+          document.getElementById('cookieBanner').classList.add('show');
+        }, 1500);
+      }
+    });
+  </script>
+
+</body>
+</html>
