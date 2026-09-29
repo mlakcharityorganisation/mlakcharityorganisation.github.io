@@ -16,7 +16,8 @@
       --gray: #555;
     }
 
-    * {
+    /* Reset & Safety Core */
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -24,6 +25,8 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     body {
@@ -32,6 +35,8 @@
       line-height: 1.6;
       background: #fff;
       overflow-x: hidden;
+      min-width: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     h1, h2, h3 {
@@ -43,17 +48,32 @@
       color: inherit;
     }
 
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    button, a {
+      touch-action: manipulation;
+    }
+
+    button {
+      font: inherit;
+      border: none;
+      background: none;
+    }
+
     .container {
-      width: 90%;
-      max-width: 1200px;
+      width: min(90%, 1200px);
       margin: 0 auto;
     }
 
-    /* ========== HEADER ========== */
+    /* ========== HEADER & NAV ========== */
     header {
       background: var(--primary);
       color: white;
-      padding: 1rem 0;
+      padding: 0.85rem 0;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -64,18 +84,24 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 0.75rem;
     }
 
     .logo {
-      font-size: 1.6rem;
+      font-size: clamp(1.1rem, 4vw, 1.6rem);
       font-weight: 700;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      line-height: 1.2;
     }
 
     .logo span {
       color: var(--gold);
+    }
+
+    nav {
+      position: relative;
     }
 
     nav ul {
@@ -88,6 +114,7 @@
       font-weight: 500;
       transition: color 0.3s;
       position: relative;
+      display: inline-block;
     }
 
     nav a:hover {
@@ -109,21 +136,25 @@
       width: 100%;
     }
 
+    /* Buttons & Touch Targets */
     .btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       background: var(--gold);
       color: var(--dark);
-      padding: 0.8rem 1.9rem;
+      padding: 0.75rem 1.75rem;
+      min-height: 44px;
       border-radius: 50px;
       font-weight: 600;
       transition: all 0.3s ease;
-      border: none;
       cursor: pointer;
+      text-align: center;
     }
 
     .btn:hover {
       background: var(--gold-light);
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
     }
 
@@ -138,20 +169,42 @@
       color: var(--primary);
     }
 
-    /* Mobile Menu */
+    .header-btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.88rem;
+    }
+
+    /* Hamburger Toggle Button */
     .hamburger {
       display: none;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       gap: 5px;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      padding: 6px;
+      border-radius: 8px;
       cursor: pointer;
     }
 
     .hamburger span {
-      width: 25px;
-      height: 3px;
+      width: 24px;
+      height: 2.5px;
       background: white;
       border-radius: 3px;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
     }
 
     /* ========== HERO ========== */
@@ -159,27 +212,28 @@
       background: linear-gradient(rgba(13, 92, 61, 0.88), rgba(8, 64, 43, 0.92)),
                   url('./sudan2.jpeg') center/cover no-repeat;
       color: white;
-      padding: 9rem 0 7rem;
+      padding: clamp(5rem, 12vw, 9rem) 0 clamp(4rem, 10vw, 7rem);
       text-align: center;
     }
 
     .hero h1 {
-      font-size: 3.4rem;
+      font-size: clamp(2rem, 6.5vw, 3.4rem);
       margin-bottom: 1.2rem;
-      line-height: 1.2;
+      line-height: 1.25;
       text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
     .hero p {
-      font-size: 1.3rem;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
       max-width: 720px;
-      margin: 0 auto 2.8rem;
+      margin: 0 auto 2.5rem;
       opacity: 0.95;
+      line-height: 1.6;
     }
 
     .hero-buttons {
       display: flex;
-      gap: 1.2rem;
+      gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -187,72 +241,73 @@
     /* ========== IMPACT ========== */
     .impact {
       background: var(--light);
-      padding: 5rem 0;
+      padding: clamp(3.5rem, 8vw, 5rem) 0;
       text-align: center;
     }
 
     .impact h2 {
-      font-size: 2.4rem;
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
       color: var(--primary);
-      margin-bottom: 3.5rem;
+      margin-bottom: clamp(2rem, 5vw, 3.5rem);
     }
 
     .counters {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
     }
 
     .counter-box {
       background: white;
-      padding: 2.2rem 1.5rem;
+      padding: 2rem 1.2rem;
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
       transition: transform 0.3s;
     }
 
     .counter-box:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
     }
 
     .counter-box .number {
-      font-size: 3rem;
+      font-size: clamp(2.3rem, 6vw, 3rem);
       font-weight: 700;
       color: var(--primary);
     }
 
     .counter-box .label {
       color: var(--gray);
-      margin-top: 0.6rem;
-      font-size: 1.05rem;
+      margin-top: 0.5rem;
+      font-size: 1rem;
     }
 
-    /* ========== COUNTRIES ========== */
-    .countries {
-      padding: 6rem 0;
-    }
-
+    /* ========== SECTION HEADINGS ========== */
     .section-title {
       text-align: center;
-      margin-bottom: 3.5rem;
+      margin-bottom: clamp(2rem, 5vw, 3.5rem);
     }
 
     .section-title h2 {
-      font-size: 2.6rem;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
       color: var(--primary);
     }
 
     .section-title p {
       color: var(--gray);
       max-width: 620px;
-      margin: 1rem auto 0;
-      font-size: 1.1rem;
+      margin: 0.8rem auto 0;
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+    }
+
+    /* ========== COUNTRIES ========== */
+    .countries {
+      padding: clamp(3.5rem, 8vw, 6rem) 0;
     }
 
     .countries-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
     }
 
     .country-card {
@@ -260,11 +315,11 @@
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 12px 35px rgba(0,0,0,0.08);
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
     }
 
     .country-card:hover {
-      transform: translateY(-12px);
+      transform: translateY(-8px);
       box-shadow: 0 20px 45px rgba(0,0,0,0.12);
     }
 
@@ -276,22 +331,22 @@
     }
 
     .country-card:hover img {
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
 
     .country-content {
-      padding: 1.8rem;
+      padding: 1.5rem;
     }
 
     .country-content h3 {
       color: var(--primary);
-      margin-bottom: 0.7rem;
-      font-size: 1.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 1.4rem;
     }
 
     .country-content p {
       color: var(--gray);
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       margin-bottom: 1.2rem;
     }
 
@@ -299,23 +354,23 @@
       display: inline-block;
       background: #e8f5e9;
       color: var(--primary);
-      padding: 0.35rem 0.9rem;
+      padding: 0.35rem 0.8rem;
       border-radius: 30px;
-      font-size: 0.82rem;
-      margin: 0 0.3rem 0.4rem 0;
+      font-size: 0.8rem;
+      margin: 0 0.2rem 0.4rem 0;
       font-weight: 500;
     }
 
     /* ========== STORIES ========== */
     .stories {
       background: var(--light);
-      padding: 6rem 0;
+      padding: clamp(3.5rem, 8vw, 6rem) 0;
     }
 
     .stories-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
     }
 
     .story-card {
@@ -323,40 +378,40 @@
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 12px 35px rgba(0,0,0,0.08);
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
       cursor: pointer;
     }
 
     .story-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-8px);
     }
 
     .story-card img {
       width: 100%;
-      height: 240px;
+      height: 220px;
       object-fit: cover;
     }
 
     .story-content {
-      padding: 1.8rem;
+      padding: 1.5rem;
     }
 
     .story-content h3 {
       color: var(--primary);
-      margin-bottom: 0.8rem;
-      font-size: 1.4rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.3rem;
     }
 
     .story-content p {
       color: var(--gray);
-      font-size: 0.98rem;
-      margin-bottom: 1.3rem;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
     }
 
     .read-more {
       color: var(--gold);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.95rem;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -369,18 +424,18 @@
 
     /* ========== PROGRAMS ========== */
     .programs {
-      padding: 6rem 0;
+      padding: clamp(3.5rem, 8vw, 6rem) 0;
     }
 
     .programs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
     }
 
     .program-card {
       text-align: center;
-      padding: 2.5rem 1.8rem;
+      padding: 2.2rem 1.5rem;
       border-radius: 16px;
       background: white;
       border: 1px solid #eee;
@@ -390,43 +445,43 @@
     .program-card:hover {
       border-color: var(--primary);
       box-shadow: 0 15px 40px rgba(13, 92, 61, 0.12);
-      transform: translateY(-8px);
+      transform: translateY(-6px);
     }
 
     .program-icon {
-      font-size: 2.8rem;
-      margin-bottom: 1.2rem;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
 
     .program-card h3 {
       color: var(--primary);
-      margin-bottom: 0.7rem;
-      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
+      font-size: 1.3rem;
     }
 
     /* ========== WAYS TO GIVE ========== */
     .give {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
-      padding: 6rem 0;
+      padding: clamp(3.5rem, 8vw, 6rem) 0;
       text-align: center;
     }
 
     .give h2 {
-      font-size: 2.6rem;
-      margin-bottom: 1.2rem;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      margin-bottom: 1rem;
     }
 
     .give p {
       max-width: 620px;
-      margin: 0 auto 3rem;
+      margin: 0 auto 2.5rem;
       opacity: 0.92;
-      font-size: 1.15rem;
+      font-size: clamp(1rem, 2vw, 1.15rem);
     }
 
     .give-options {
       display: flex;
-      gap: 1.3rem;
+      gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -435,20 +490,20 @@
     footer {
       background: var(--primary-dark);
       color: white;
-      padding: 5rem 0 2.5rem;
+      padding: clamp(3rem, 6vw, 5rem) 0 2rem;
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3rem;
     }
 
     .footer-col h4 {
       color: var(--gold);
-      margin-bottom: 1.4rem;
-      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+      font-size: 1.2rem;
     }
 
     .footer-col ul {
@@ -456,7 +511,8 @@
     }
 
     .footer-col li {
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
     }
 
     .footer-col a:hover {
@@ -465,9 +521,9 @@
 
     .copyright {
       text-align: center;
-      padding-top: 2.5rem;
+      padding-top: 2rem;
       border-top: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       opacity: 0.8;
     }
 
@@ -483,7 +539,8 @@
       z-index: 2000;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 15px;
+      overscroll-behavior: contain;
     }
 
     .modal.active {
@@ -492,56 +549,62 @@
 
     .modal-content {
       background: white;
-      max-width: 700px;
+      max-width: 650px;
       width: 100%;
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
       position: relative;
-      max-height: 90vh;
+      max-height: 88vh;
       overflow-y: auto;
-      animation: modalIn 0.4s ease;
+      animation: modalIn 0.3s ease;
     }
 
     @keyframes modalIn {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .modal-content img {
       width: 100%;
-      height: 280px;
+      height: 240px;
       object-fit: cover;
     }
 
     .modal-body {
-      padding: 2rem;
+      padding: 1.5rem;
     }
 
     .modal-body h3 {
       color: var(--primary);
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
     }
 
     .modal-body p {
       color: var(--gray);
-      margin-bottom: 1rem;
-      line-height: 1.7;
+      margin-bottom: 0.9rem;
+      line-height: 1.6;
+      font-size: 0.95rem;
     }
 
     .close-modal {
       position: absolute;
-      top: 15px;
-      right: 20px;
+      top: 12px;
+      right: 12px;
       background: white;
       border: none;
       width: 40px;
       height: 40px;
+      min-width: 40px;
+      min-height: 40px;
       border-radius: 50%;
       font-size: 1.4rem;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* ========== COOKIE BANNER ========== */
@@ -552,11 +615,11 @@
       right: 0;
       background: var(--primary-dark);
       color: white;
-      padding: 1.2rem 2rem;
+      padding: 1rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1rem;
       z-index: 3000;
       box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
       transform: translateY(100%);
@@ -568,47 +631,112 @@
     }
 
     .cookie-banner p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       opacity: 0.95;
     }
 
     .cookie-banner .btn {
-      padding: 0.6rem 1.5rem;
-      font-size: 0.9rem;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.85rem;
       white-space: nowrap;
     }
 
-    /* ========== RESPONSIVE ========== */
+    /* ========== MOBILE BREAKPOINTS ========== */
     @media (max-width: 900px) {
+      .hamburger {
+        display: flex;
+      }
+
       nav ul {
         display: none;
         position: absolute;
-        top: 70px;
-        left: 0;
+        top: calc(100% + 12px);
         right: 0;
-        background: var(--primary);
+        width: min(88vw, 300px);
+        background: var(--primary-dark);
         flex-direction: column;
-        padding: 1.5rem;
-        gap: 1.2rem;
-        text-align: center;
+        padding: 0.75rem;
+        gap: 0.25rem;
+        border-radius: 14px;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        z-index: 1100;
       }
 
       nav ul.active {
         display: flex;
       }
 
-      .hamburger {
-        display: flex;
+      nav a {
+        display: block;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        width: 100%;
       }
 
-      .hero h1 {
-        font-size: 2.4rem;
+      nav a:hover {
+        background: rgba(255,255,255,0.1);
+      }
+
+      nav a::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 92%;
+      }
+
+      .logo-text-extra {
+        display: none;
+      }
+
+      .hero-buttons,
+      .give-options {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-buttons .btn,
+      .give-options .btn {
+        width: 100%;
+      }
+
+      .modal {
+        padding: 10px;
+        align-items: flex-end;
+      }
+
+      .modal-content {
+        max-height: 90vh;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .modal-content img {
+        height: 180px;
       }
 
       .cookie-banner {
         flex-direction: column;
         text-align: center;
-        padding: 1.5rem;
+        padding: 1.2rem;
+        bottom: 0;
+      }
+
+      .cookie-banner .btn {
+        width: 100%;
+      }
+    }
+
+    /* Accessibility Preferences */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -618,10 +746,15 @@
   <!-- HEADER -->
   <header>
     <div class="container header-content">
-      <div class="logo">
-        <span>☪</span> Mlak <span> Charity Organization</span>
-      </div>
+      <a href="#home" class="logo">
+        <span>☪</span> Mlak <span class="logo-text-extra">Charity Organization</span>
+      </a>
       <nav>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <ul id="nav-menu">
           <li><a href="#home">Home</a></li>
           <li><a href="#countries">Countries</a></li>
@@ -631,12 +764,7 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <a href="donate.html" class="btn">Donate Now</a>
+      <a href="donate.html" class="btn header-btn">Donate Now</a>
     </div>
   </header>
 
@@ -686,9 +814,8 @@
       </div>
 
       <div class="countries-grid">
-        <!-- Sudan -->
         <div class="country-card">
-          <img src="./sudan.jpeg" alt="Sudan">
+          <img src="./sudan.jpeg" alt="Sudan relief operations" loading="lazy">
           <div class="country-content">
             <h3>🇸🇩 Sudan</h3>
             <p>Emergency relief, clean water projects, food distribution and support for displaced families affected by conflict and hardship.</p>
@@ -699,9 +826,8 @@
           </div>
         </div>
 
-        <!-- Uganda -->
         <div class="country-card">
-          <img src="./ugnda.jpeg" alt="Uganda">
+          <img src="./ugnda.jpeg" alt="Uganda projects base" loading="lazy">
           <div class="country-content">
             <h3>🇺🇬 Uganda</h3>
             <p>Our main operational base in Eastern Uganda. Boreholes, orphan care, mosque construction, food packs and Quran distribution.</p>
@@ -712,9 +838,8 @@
           </div>
         </div>
 
-        <!-- Kenya -->
         <div class="country-card">
-          <img src="./kenya.jpeg" alt="Kenya">
+          <img src="./kenya.jpeg" alt="Kenya community support" loading="lazy">
           <div class="country-content">
             <h3>🇰🇪 Kenya</h3>
             <p>Supporting vulnerable communities with clean water access, food security, orphan sponsorship and Islamic education programs.</p>
@@ -737,8 +862,8 @@
       </div>
       <div class="stories-grid">
 
-        <div class="story-card" onclick="openModal('story1')">
-          <img src="./sudan2.jpeg" alt="Water well">
+        <div class="story-card" onclick="openModal('story1')" role="button" tabindex="0">
+          <img src="./sudan2.jpeg" alt="Clean water well in village" loading="lazy">
           <div class="story-content">
             <h3>From Miles of Walking to Clean Water at Home</h3>
             <p>In a remote village, women and children used to walk several kilometers daily for unsafe water. After our borehole was completed, everything changed...</p>
@@ -746,8 +871,8 @@
           </div>
         </div>
 
-        <div class="story-card" onclick="openModal('story2')">
-          <img src="./sudan3.jpeg" alt="Orphan">
+        <div class="story-card" onclick="openModal('story2')" role="button" tabindex="0">
+          <img src="./sudan3.jpeg" alt="Supported orphan child" loading="lazy">
           <div class="story-content">
             <h3>Amina’s New Beginning</h3>
             <p>Orphaned at a young age, Amina now receives education, food, and care through our orphan sponsorship program. Her smile tells the whole story.</p>
@@ -755,8 +880,8 @@
           </div>
         </div>
 
-        <div class="story-card" onclick="openModal('story3')">
-          <img src="./ugnda.jpeg" alt="Mosque">
+        <div class="story-card" onclick="openModal('story3')" role="button" tabindex="0">
+          <img src="./ugnda.jpeg" alt="Newly built mosque" loading="lazy">
           <div class="story-content">
             <h3>Building a House of Allah</h3>
             <p>The community finally has a proper mosque. Friday prayers, Quran classes, and gatherings now take place under one roof — a true Sadaqah Jariyah.</p>
@@ -777,32 +902,32 @@
       </div>
       <div class="programs-grid">
         <div class="program-card">
-          <div class="program-icon">💧</div>
+          <div class="program-icon" aria-hidden="true">💧</div>
           <h3>Clean Water</h3>
           <p>Boreholes and wells bringing safe drinking water to remote villages.</p>
         </div>
         <div class="program-card">
-          <div class="program-icon">🍚</div>
+          <div class="program-icon" aria-hidden="true">🍚</div>
           <h3>Food Distribution</h3>
           <p>Nutritious food packs for orphans, widows, and struggling families.</p>
         </div>
         <div class="program-card">
-          <div class="program-icon">🧒</div>
+          <div class="program-icon" aria-hidden="true">🧒</div>
           <h3>Orphan Care</h3>
           <p>Education, food, healthcare and emotional support for vulnerable children.</p>
         </div>
         <div class="program-card">
-          <div class="program-icon">🕌</div>
+          <div class="program-icon" aria-hidden="true">🕌</div>
           <h3>Mosque Construction</h3>
           <p>Building places of worship and community centers (Sadaqah Jariyah).</p>
         </div>
         <div class="program-card">
-          <div class="program-icon">🌙</div>
+          <div class="program-icon" aria-hidden="true">🌙</div>
           <h3>Ramadan & Zakat</h3>
           <p>Iftar meals, Zakat distribution, and Qurbani support every year.</p>
         </div>
         <div class="program-card">
-          <div class="program-icon">📖</div>
+          <div class="program-icon" aria-hidden="true">📖</div>
           <h3>Quran & Education</h3>
           <p>Distributing Qurans and supporting Islamic learning for the next generation.</p>
         </div>
@@ -816,10 +941,10 @@
       <h2>Ways to Give</h2>
       <p>Every donation, big or small, creates lasting change. Choose how you want to help today.</p>
       <div class="give-options">
-        <a href="#" class="btn">General Donation</a>
-        <a href="#" class="btn">Sponsor a Borehole</a>
-        <a href="#" class="btn">Orphan Sponsorship</a>
-        <a href="#" class="btn">Zakat / Sadaqah</a>
+        <a href="donate.html" class="btn">General Donation</a>
+        <a href="donate.html" class="btn">Sponsor a Borehole</a>
+        <a href="donate.html" class="btn">Orphan Sponsorship</a>
+        <a href="donate.html" class="btn">Zakat / Sadaqah</a>
       </div>
     </div>
   </section>
@@ -866,10 +991,10 @@
   </footer>
 
   <!-- STORY MODALS -->
-  <div class="modal" id="story1">
+  <div class="modal" id="story1" role="dialog" aria-modal="true">
     <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('story1')">×</button>
-      <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800" alt="Clean water">
+      <button class="close-modal" onclick="closeModal('story1')" aria-label="Close modal">×</button>
+      <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800" alt="Clean water project" loading="lazy">
       <div class="modal-body">
         <h3>From Miles of Walking to Clean Water at Home</h3>
         <p>In a remote village in Eastern Uganda, women and young girls spent many hours every day walking long distances under the hot sun just to collect water that was often contaminated.</p>
@@ -880,10 +1005,10 @@
     </div>
   </div>
 
-  <div class="modal" id="story2">
+  <div class="modal" id="story2" role="dialog" aria-modal="true">
     <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('story2')">×</button>
-      <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800" alt="Amina">
+      <button class="close-modal" onclick="closeModal('story2')" aria-label="Close modal">×</button>
+      <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800" alt="Amina's story" loading="lazy">
       <div class="modal-body">
         <h3>Amina’s New Beginning</h3>
         <p>Amina lost both her parents at a very young age. She was living with relatives who could barely afford food, let alone school fees.</p>
@@ -894,10 +1019,10 @@
     </div>
   </div>
 
-  <div class="modal" id="story3">
+  <div class="modal" id="story3" role="dialog" aria-modal="true">
     <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('story3')">×</button>
-      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800" alt="Mosque">
+      <button class="close-modal" onclick="closeModal('story3')" aria-label="Close modal">×</button>
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800" alt="Mosque project" loading="lazy">
       <div class="modal-body">
         <h3>Building a House of Allah</h3>
         <p>For many years, the community prayed under a temporary shelter made of iron sheets. During the rainy season, prayers were often interrupted by leaking roofs.</p>
@@ -915,22 +1040,38 @@
   </div>
 
   <script>
-    // Mobile Menu
+    // Mobile Navigation Toggle
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
 
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
+    function closeNavMenu() {
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open navigation menu');
+    }
+
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     });
 
-    // Close menu when clicking a link
+    // Close menu when tapping menu items
     document.querySelectorAll('#nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-      });
+      link.addEventListener('click', closeNavMenu);
     });
 
-    // Counter Animation
+    // Close menu when tapping anywhere outside
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('header') && navMenu.classList.contains('active')) {
+        closeNavMenu();
+      }
+    });
+
+    // Counter Animation via IntersectionObserver
     const counters = document.querySelectorAll('.number');
     const speed = 200;
 
@@ -952,37 +1093,70 @@
       });
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        animateCounters();
-        observer.disconnect();
-      }
-    }, { threshold: 0.5 });
+    const impactSection = document.querySelector('.impact');
+    if (impactSection) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          animateCounters();
+          observer.disconnect();
+        }
+      }, { threshold: 0.3 });
+      observer.observe(impactSection);
+    }
 
-    observer.observe(document.querySelector('.impact'));
-
-    // Modal Functions
+    // Modal Handling
     function openModal(id) {
-      document.getElementById(id).classList.add('active');
-      document.body.style.overflow = 'hidden';
+      const targetModal = document.getElementById(id);
+      if (targetModal) {
+        targetModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        targetModal.querySelector('.close-modal')?.focus();
+      }
     }
 
     function closeModal(id) {
-      document.getElementById(id).classList.remove('active');
-      document.body.style.overflow = 'auto';
+      const targetModal = document.getElementById(id);
+      if (targetModal) {
+        targetModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     }
 
-    // Close modal when clicking outside
+    // Close modal on background tap
     document.querySelectorAll('.modal').forEach(modal => {
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
           modal.classList.remove('active');
-          document.body.style.overflow = 'auto';
+          document.body.style.overflow = '';
         }
       });
     });
 
-    // Cookie Banner
+    // Keydown Handling (Escape Key)
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        if (navMenu.classList.contains('active')) {
+          closeNavMenu();
+        }
+        const activeModal = document.querySelector('.modal.active');
+        if (activeModal) {
+          activeModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+
+    // Keyboard support for story card clicks
+    document.querySelectorAll('.story-card').forEach(card => {
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    // Cookie Banner Handling
     function acceptCookies() {
       localStorage.setItem('cookiesAccepted', 'true');
       document.getElementById('cookieBanner').classList.remove('show');
@@ -992,10 +1166,9 @@
       if (!localStorage.getItem('cookiesAccepted')) {
         setTimeout(() => {
           document.getElementById('cookieBanner').classList.add('show');
-        }, 1500);
+        }, 1200);
       }
     });
   </script>
-
 </body>
 </html>
